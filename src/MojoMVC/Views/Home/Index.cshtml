@@ -35,14 +35,16 @@
         <section class="col-md-12">
             <h2>Your Feed</h2>
             <h3>Title : @Model.Title</h3>
-            <h4>Description: @Model.Description</h4>
+            <h4><em>@Model.Description</em></h4>
+            <hr/>
             <h5>Items</h5>
+            <hr/>
             <div class="feed-items">
                 @foreach (var item in @Model.Items)
                 {
-                    <div class="item-title">@item.Title</div>
+                    <h6 class="item-title">@item.Title</h6>
                     <div class="item-description">@item.Description</div>
-                    <div class="item-content">@item.Description</div>
+                    <hr/>
                 }
             </div>
         </section>

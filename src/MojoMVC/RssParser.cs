@@ -23,13 +23,13 @@ namespace MojoMVC
         public Feed GetRssFeed(string filePath)
         {
             using (var fileStream = new FileStream(filePath, FileMode.Open))
-           {
-               var serializer = new XmlSerializer(typeof(RssFeed));
+            {
+                var serializer = new XmlSerializer(typeof(RssFeed));
     
-               var myFeed = (RssFeed)serializer.Deserialize(fileStream);
+                var myFeed = (RssFeed)serializer.Deserialize(fileStream);
     
-               return myFeed.Channel;                       
-           }
+                return myFeed.Channel;                       
+            }
         }
     }
 }
