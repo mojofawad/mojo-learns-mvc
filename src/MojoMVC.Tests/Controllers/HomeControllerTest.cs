@@ -1,10 +1,7 @@
-﻿using System.IO;
-using System.Reflection;
+﻿using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MojoMVC.Controllers;
 using System.Web.Mvc;
-using MojoMVC.Infrastructure;
-using Moq;
 
 namespace MojoMVC.Tests.Controllers
 {
@@ -12,21 +9,13 @@ namespace MojoMVC.Tests.Controllers
     public class HomeControllerTest
     {
         [TestMethod]
-        public void Index()
+        public async Task Index()
         {
             // Arrange
-            var testDataPath = Path.Combine(
-                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "",
-                "test-data",
-                "sample-file.xml");
-            
-            var mockFilePathProvider = new Mock<IFilePathProvider>();
-            mockFilePathProvider.Setup(x => x.MapPath(It.IsAny<string>()))
-                .Returns(testDataPath);
-            HomeController controller = new HomeController(mockFilePathProvider.Object);
+            HomeController controller = new HomeController();
 
             // Act
-            ViewResult result = controller.Index() as ViewResult;
+            ViewResult result = await controller.Index() as ViewResult;
 
             // Assert
             Assert.IsNotNull(result);

@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MojoMVC.Infrastructure;
 
 namespace MojoMVC.Tests
 {
@@ -11,43 +12,16 @@ namespace MojoMVC.Tests
             Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "",
             "test-data",
             "sample-file.xml");
-        
-        [TestMethod]
-        public void GetFeedTitle()
-        {
-            // Arrange
-            var parser = new RssParser();
-            
-            // Act
-            var title = parser.GetFeedTitle(testData);
-            
-            // Assert
-            Assert.AreEqual("RSS Title", title);
-        }
 
         [TestMethod]
-        public void GetFeedItems()
+        public void GetRssFeedConvertStreamToRssFeed()
         {
             // Arrange
             var parser = new RssParser();
+            var stream = new FileStream(testData, FileMode.Open);
             
             // Act
-            var items= parser.GetFeedItems(testData);
-            
-            // Assert
-            Assert.AreEqual(2, items.Count);
-            Assert.AreEqual(items[0].Title, "Example entry");
-            Assert.AreEqual(items[1].Title, "Mojo's entry");
-        }
-
-        [TestMethod]
-        public void GetRssFeed()
-        {
-            // Arrange
-            var parser = new RssParser();
-            
-            // Act
-            var feed = parser.GetRssFeed(testData);
+            var feed = parser.ConvertStreamToRssFeed(stream);
             
             // Assert
             Assert.AreEqual(feed.Title, "RSS Title");
