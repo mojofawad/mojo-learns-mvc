@@ -18,6 +18,11 @@ namespace MojoMVC
 
         public List<FeedItem> GetFeedItems(string filePath)
         {
+            if (string.IsNullOrWhiteSpace(filePath))
+            {
+                throw new ArgumentException("filePath cannot be null, empty, or whitespace.", nameof(filePath));
+            }
+            
             var feed = GetRssFeed(filePath);
             return feed.Items;
         }

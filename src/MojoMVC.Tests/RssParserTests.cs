@@ -15,8 +15,6 @@ namespace MojoMVC.Tests
         [TestMethod]
         public void GetFeedTitle()
         {
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-            
             // Arrange
             var parser = new RssParser();
             
