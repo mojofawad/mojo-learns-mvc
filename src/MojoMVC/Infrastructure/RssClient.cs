@@ -11,18 +11,19 @@ namespace MojoMVC.Infrastructure
         
         public async Task<Feed> FetchRssFromUrl(string url)
         {
-            var response = await httpClient.GetAsync(url);
-
-            if (!response.IsSuccessStatusCode)
+            using (var response = await httpClient.GetAsync(url))
             {
-                throw new HttpRequestException(
-                    $"Failed to fetch feed from URL '{url}'. Status code: {(int)response.StatusCode} {response.StatusCode}.");
-            }
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new HttpRequestException(
+                        $"Failed to fetch feed from URL '{url}'. Status code: {(int)response.StatusCode} {response.StatusCode}.");
+                }
 
-            var someData = await response.Content.ReadAsStreamAsync();
-                
-            var parser = new RssParser();
-            return parser.DeserializeFeedFromStream(someData);
+                var someData = await response.Content.ReadAsStreamAsync();
+
+                var parser = new RssParser();
+                return parser.DeserializeFeedFromStream(someData);
+            }
         }
     }
 }
