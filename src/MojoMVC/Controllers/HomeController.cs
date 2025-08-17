@@ -6,7 +6,11 @@ namespace MojoMVC.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            const string filePath = @"D:\self\mojo-learns-mvc\xml-samples\wiki-rss-example.xml";
+            
+            var model = new RssParser().GetRssFeed(filePath);
+            
+            return View(model);
         }
 
         public ActionResult About()
