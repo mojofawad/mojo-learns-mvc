@@ -17,10 +17,5 @@ namespace MojoMVC.Infrastructure
                 return myFeed.Channel;                       
             }
         }
-
-        public Feed ConvertStreamToRssFeed(Stream someData)
-        {
-            return DeserializeFeedFromStream(someData);
-        }
     }
 }

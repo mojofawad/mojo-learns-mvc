@@ -7,20 +7,22 @@ namespace MojoMVC.Infrastructure
 {
     public class RssClient
     {
+        private static readonly HttpClient httpClient = new HttpClient();
+        
         public async Task<Feed> FetchRssFromUrl(string url)
         {
-            var httpClient = new HttpClient();
             var response = await httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new ArgumentException();
+                throw new HttpRequestException(
+                    $"Failed to fetch feed from URL '{url}'. Status code: {(int)response.StatusCode} {response.StatusCode}.");
             }
 
             var someData = await response.Content.ReadAsStreamAsync();
                 
             var parser = new RssParser();
-            return parser.ConvertStreamToRssFeed(someData);
+            return parser.DeserializeFeedFromStream(someData);
         }
     }
 }
