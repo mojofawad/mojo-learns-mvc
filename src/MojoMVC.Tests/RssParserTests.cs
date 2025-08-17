@@ -30,7 +30,7 @@ namespace MojoMVC.Tests
             var items= parser.GetFeedItems(testData);
             
             // Assert
-            Assert.AreEqual(2, items.Length);
+            Assert.AreEqual(2, items.Count);
             Assert.AreEqual(items[0].Title, "Example entry");
             Assert.AreEqual(items[1].Title, "Mojo's entry");
         }

@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Xml.Serialization;
 using MojoMVC.Models;
 
@@ -13,7 +14,7 @@ namespace MojoMVC
             return feed.Title;
         }
 
-        public FeedItem[] GetFeedItems(string filePath)
+        public List<FeedItem> GetFeedItems(string filePath)
         {
             var feed = GetRssFeed(filePath);
             return feed.Items;

@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace MojoMVC.Models
 {
@@ -15,6 +16,6 @@ namespace MojoMVC.Models
         public string Link { get; set; }
         
         [XmlElement("item")]
-        public FeedItem[] Items { get; set; }
+        public List<FeedItem> Items { get; set; }
     }
 }
