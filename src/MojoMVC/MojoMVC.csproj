@@ -124,6 +124,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\FilePathProvider.cs" />
+    <Compile Include="Infrastructure\IFilePathProvider.cs" />
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\FeedItem.cs" />
     <Compile Include="Models\RssFeed.cs" />

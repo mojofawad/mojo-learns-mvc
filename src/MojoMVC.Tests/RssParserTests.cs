@@ -1,15 +1,22 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.IO;
+using System.Reflection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MojoMVC.Tests
 {
     [TestClass]
     public class RssParserTests
     {
-        private const string testData = @"D:\self\mojo-learns-mvc\src\MojoMVC.Tests\test-data\sample-file.xml";
+        private static readonly string testData = Path.Combine(
+            Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? "",
+            "test-data",
+            "sample-file.xml");
         
         [TestMethod]
         public void GetFeedTitle()
         {
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            
             // Arrange
             var parser = new RssParser();
             
