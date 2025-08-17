@@ -18,15 +18,16 @@ namespace MojoMVC.Tests
         {
             // Arrange
             var parser = new RssParser();
-            var stream = new FileStream(testData, FileMode.Open);
-            
-            // Act
-            var feed = parser.ConvertStreamToRssFeed(stream);
-            
-            // Assert
-            Assert.AreEqual(feed.Title, "RSS Title");
-            Assert.AreEqual(feed.Description, "This is an example of an RSS feed");
-            Assert.AreEqual(feed.Link, "http://www.example.com/main.html");
+            using (var stream = new FileStream(testData, FileMode.Open))
+            {
+                // Act
+                var feed = parser.DeserializeFeedFromStream(stream);
+
+                // Assert
+                Assert.AreEqual(feed.Title, "RSS Title");
+                Assert.AreEqual(feed.Description, "This is an example of an RSS feed");
+                Assert.AreEqual(feed.Link, "http://www.example.com/main.html");
+            }
         }
     }
 }
