@@ -6,7 +6,7 @@ namespace MojoMVC.Controllers
     {
         public ActionResult Index()
         {
-            const string filePath = @"D:\self\mojo-learns-mvc\xml-samples\wiki-rss-example.xml";
+            var filePath = Server.MapPath("~/App_Data/wiki-rss-example.xml");
             
             var model = new RssParser().GetRssFeed(filePath);
             
