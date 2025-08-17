@@ -1,16 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using MojoMVC.Infrastructure;
 
 namespace MojoMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IFilePathProvider _filePathProvider;
+
+        public HomeController() : this(new FilePathProvider())
+        {
+            
+        }
+
+        public HomeController(IFilePathProvider filePathProvider)
+        {
+            _filePathProvider = filePathProvider;
+        }
+        
         public ActionResult Index()
         {
-            return View();
+            var filePath = _filePathProvider.MapPath("~/App_Data/wiki-rss-example.xml");
+            
+            var model = new RssParser().GetRssFeed(filePath);
+            
+            return View(model);
         }
 
         public ActionResult About()
