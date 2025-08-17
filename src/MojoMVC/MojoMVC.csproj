@@ -126,11 +126,13 @@
     </Compile>
     <Compile Include="Infrastructure\FilePathProvider.cs" />
     <Compile Include="Infrastructure\IFilePathProvider.cs" />
+    <Compile Include="Infrastructure\RssClient.cs" />
+    <Compile Include="Infrastructure\RssParser.cs" />
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\FeedItem.cs" />
     <Compile Include="Models\RssFeed.cs" />
-    <Compile Include="RssParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RssService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\wiki-rss-example.xml" />

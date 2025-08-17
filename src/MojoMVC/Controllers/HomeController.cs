@@ -1,27 +1,15 @@
-﻿using System.Web.Mvc;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
 using MojoMVC.Infrastructure;
+using MojoMVC.Models;
 
 namespace MojoMVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IFilePathProvider _filePathProvider;
-
-        public HomeController() : this(new FilePathProvider())
+        public async Task<ActionResult> Index()
         {
-            
-        }
-
-        public HomeController(IFilePathProvider filePathProvider)
-        {
-            _filePathProvider = filePathProvider;
-        }
-        
-        public ActionResult Index()
-        {
-            var filePath = _filePathProvider.MapPath("~/App_Data/wiki-rss-example.xml");
-            
-            var model = new RssParser().GetRssFeed(filePath);
+            var model = await RssService.RetrieveRssFeed();
             
             return View(model);
         }
