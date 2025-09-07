@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using MojoMVC.Models.ViewModels.Forms;
 
@@ -7,9 +8,9 @@ namespace MojoMVC.Controllers
     public class PreviewController : Controller
     {
         [HttpGet]
-        public ActionResult Index(PreviewInput previewInput)
+        public ActionResult Index()
         {
-            return View(previewInput);
+            return View(new PreviewInput());
         }
 
         [HttpPost]
@@ -17,12 +18,21 @@ namespace MojoMVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                return View("Index", input);
             }
 
-            var feed = await RssService.RetrieveRssFeed(input.FeedUrl);
+            try
+            {
+                var feed = await RssService.RetrieveRssFeed(input.FeedUrl);
 
-            return View(feed);
+                return View(feed);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("FeedUrl", $"Unable to retrieve RSS feed");
+
+                return View("Index", input);
+            }
         }
     }
 }
