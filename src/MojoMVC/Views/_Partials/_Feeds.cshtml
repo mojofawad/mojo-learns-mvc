@@ -1,0 +1,20 @@
+﻿@model List<MojoMVC.Models.ViewModels.Interfaces.IFeedViewModel>
+
+@foreach (var feed in Model)
+{
+    <div class="feed">
+        <h3>@feed.Title</h3>
+        <h4><em>@feed.Description</em></h4>
+        <hr />
+        <div class="feed-items">
+            @foreach (var item in feed.FeedItems)
+            {
+                <div class="feed-item">
+                    <h5 class="item-title">@item.Title</h5>
+                    <div class="item-description">@item.Description</div>
+                    <hr />
+                </div>
+            }
+        </div>
+    </div>
+}

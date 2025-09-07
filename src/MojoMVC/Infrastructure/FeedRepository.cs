@@ -16,5 +16,15 @@ namespace MojoMVC.Infrastructure
                     .ToListAsync();
             }
         }
+        
+        public static async Task<List<DbFeed>> GetFeedsFromDb()
+        {
+            using (var context = new MojoDbContext())
+            {
+                return await context.Feeds
+                    .Include(f => f.FeedItems)
+                    .ToListAsync();
+            }
+        }
     }
 }

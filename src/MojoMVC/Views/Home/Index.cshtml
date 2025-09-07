@@ -1,7 +1,6 @@
-﻿@model MojoMVC.Models.ViewModels.IndexViewModel
+﻿@model MojoMVC.Models.ViewModels.HomeIndexViewModel
 @{
     ViewBag.Title = "Home Page";
-    var dbFeedGrouping = Model.FeedItems.GroupBy(f => f.DbFeed);
 }
 
 <main>
@@ -35,38 +34,11 @@
     <div class="row">
         <section class="col-md-6">
             <h2>Feed from Url</h2>
-            <h3>Title : @Model.RssWebFeed.Title</h3>
-            <h4><em>@Model.RssWebFeed.Description</em></h4>
-            <hr/>
-            <h5>Items</h5>
-            <hr/>
-            <div class="feed-items">
-                @foreach (var item in Model.RssWebFeed.Items)
-                {
-                    <h6 class="item-title">@item.Title</h6>
-                    <div class="item-description">@item.Description</div>
-                    <hr/>
-                }
-            </div>
+            @Html.Partial("../_Partials/_Feeds", Model.WebFeeds)
         </section>
         <section class="col-md-6">
             <h2>Feed from Db</h2>
-            @foreach (var feed in dbFeedGrouping)
-            {
-                <h3>Title: @feed.Key.Title </h3>
-                <h4><em>@feed.Key.Description</em></h4>
-                <hr/>
-                <h5>Items</h5>
-                <hr/>
-                <div class="feed-items">
-                    @foreach (var item in feed)
-                    {
-                        <h6 class="item-title">@item.Title</h6>
-                        <div class="item-description">@item.Description</div>
-                        <hr/>
-                    }
-                </div>
-            }
+            @Html.Partial("../_Partials/_Feeds", Model.DbFeeds)
         </section>
     </div>
 </main>
