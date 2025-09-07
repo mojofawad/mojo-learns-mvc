@@ -2,19 +2,15 @@
 
 @foreach (var feed in Model)
 {
-    <div class="feed">
-        <h3>@feed.Title</h3>
-        <h4><em>@feed.Description</em></h4>
-        <hr />
-        <div class="feed-items">
+    <div class="card mb-4">
+        <div class="feed-header card-header">
+            @feed.Title
+        </div>
+        <ul class="feed-items list-group list-group-flush">
             @foreach (var item in feed.FeedItems)
             {
-                <div class="feed-item">
-                    <h5 class="item-title">@item.Title</h5>
-                    <div class="item-description">@item.Description</div>
-                    <hr />
-                </div>
+                <li class="list-group-item">@item.Title</li>
             }
-        </div>
+        </ul>
     </div>
 }
