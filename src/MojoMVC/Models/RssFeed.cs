@@ -6,6 +6,6 @@ namespace MojoMVC.Models
     public class RssFeed
     {
         [XmlElement("channel")]
-        public Feed Channel { get; set; }
+        public WebFeed Channel { get; set; }
     }
 }

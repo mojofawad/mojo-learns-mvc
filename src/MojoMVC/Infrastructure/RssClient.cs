@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using MojoMVC.Models;
 
@@ -9,7 +8,7 @@ namespace MojoMVC.Infrastructure
     {
         private static readonly HttpClient httpClient = new HttpClient();
         
-        public async Task<Feed> FetchRssFromUrl(string url)
+        public async Task<WebFeed> FetchRssFromUrl(string url)
         {
             using (var response = await httpClient.GetAsync(url))
             {

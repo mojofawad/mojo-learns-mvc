@@ -7,7 +7,7 @@ namespace MojoMVC.Infrastructure
 {
     public class RssParser
     {
-        public Feed DeserializeFeedFromStream(Stream stream)
+        public WebFeed DeserializeFeedFromStream(Stream stream)
         {
             if (stream == null)
             {
