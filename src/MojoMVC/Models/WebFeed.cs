@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 namespace MojoMVC.Models
 {
     [XmlRoot("channel")]
-    public class Feed
+    public class WebFeed
     {
         [XmlElement("title")]
         public string Title { get; set; }

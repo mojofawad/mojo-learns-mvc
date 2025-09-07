@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Mvc;
 using MojoMVC.Infrastructure;
-using MojoMVC.Models;
+using MojoMVC.Models.ViewModels;
 
 namespace MojoMVC.Controllers
 {
@@ -9,8 +9,10 @@ namespace MojoMVC.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            var model = await RssService.RetrieveRssFeed();
+            var rssFeed = await RssService.RetrieveRssFeed();
+            var dbFeedItems = await FeedRepository.GetFeedItemsFromDb();
             
+            var model = new IndexViewModel(rssFeed, dbFeedItems);
             return View(model);
         }
 
