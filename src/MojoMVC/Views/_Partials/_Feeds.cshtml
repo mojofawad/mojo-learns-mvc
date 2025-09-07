@@ -1,0 +1,16 @@
+﻿@model List<MojoMVC.Models.ViewModels.Interfaces.IFeedViewModel>
+
+@foreach (var feed in Model)
+{
+    <div class="card mb-4">
+        <div class="feed-header card-header">
+            @feed.Title
+        </div>
+        <ul class="feed-items list-group list-group-flush">
+            @foreach (var item in feed.FeedItems)
+            {
+                <li class="list-group-item">@item.Title</li>
+            }
+        </ul>
+    </div>
+}

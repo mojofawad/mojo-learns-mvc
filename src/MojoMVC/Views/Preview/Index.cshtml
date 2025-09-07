@@ -1,0 +1,60 @@
+﻿@model MojoMVC.Models.ViewModels.Forms.PreviewInput
+@{
+    ViewBag.Title = "Preview RSS Feed";
+}
+
+@section scripts
+{
+    <script
+        src="@Url.Content("~/scripts/jquery.unobtrusive-ajax.js")">
+    </script>
+}
+
+<main>
+    <section class="row" aria-labelledby="aspnetTitle">
+        <h1 id="title">Preview Feed</h1>
+        <h5>Sample Link:</h5>
+        <div style="display: flex; align-items: center; max-width: 400px; gap: 8px;">
+            <pre style="margin: 0; flex-shrink: 1;"><code>https://feeds.megaphone.fm/FSI1483080183</code></pre>
+            <button class="btn btn-sm btn-outline-primary" onclick="copyToClipboard(this)" style="margin-left: 0;">Copy
+            </button>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                @using (Ajax.BeginForm("PreviewFeed", "Preview", new AjaxOptions
+                            {
+                                UpdateTargetId = "previewResults",
+                                InsertionMode = InsertionMode.Replace
+                            }))
+                {
+                    @Html.ValidationSummary(true)
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.FeedUrl)
+                        @Html.TextBoxFor(m => m.FeedUrl, new { @class = "form-control my-2", placeholder = "Enter RSS Feed URL", type = "url" })
+                        @Html.ValidationMessageFor(m => m.FeedUrl, "", new { @class = "text-danger" })
+                    </div>
+
+                    <input type="submit" class="my-2 btn btn-outline-primary" value="Preview"/>
+                }
+            </div>
+            <div class="col-md-8">
+                <div id="previewResults"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    function copyToClipboard(button) {
+        const sampleLink = document.querySelector("pre code").innerText;
+        navigator.clipboard.writeText(sampleLink).then(() => {
+            const originalText = button.innerText;
+            button.innerText = "Copied!";
+            setTimeout(() => {
+                button.innerText = originalText;
+            }, 1000);
+        });
+    }
+</script>
