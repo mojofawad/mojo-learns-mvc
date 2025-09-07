@@ -38,7 +38,7 @@ namespace MojoMVC.Migrations
                     Id = 1,
                     Title = "Google's First Feed Item",
                     Description = "First Feed Item by Google",
-                    Link = "https://www.google.com/search?q=guid+generator&client=firefox-b-1-d&sca_esv=f92416c7ac1eaa91&sxsrf=AE3TifOQqZtUnFPjY8xfWpJQJsDtNIlj7A%3A1757266226751&ei=MsG9aI_LLc_jwN4P4MnJqQU&ved=0ahUKEwiPrOLplsePAxXPMdAFHeBkMlUQ4dUDCBA&oq=guid+generator&gs_lp=Egxnd3Mtd2l6LXNlcnAiDmd1aWQgZ2VuZXJhdG9ySABQAFgAcAB4AZABAJgBAKABAKoBALgBDMgBAJgCAKACAJgDAJIHAKAHALIHALgHAMIHAMgHAA&sclient=gws-wiz-serp",
+                    Link = "https://www.google.com/search?q=guid+generator",
                     Guid = "57c4df7e-410b-4180-84d6-812dfbeda869",
                     PublishedDate = "2025-01-01",
                     DbFeedId = 1
