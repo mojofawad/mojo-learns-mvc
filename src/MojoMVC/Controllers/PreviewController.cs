@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using MojoMVC.Models.ViewModels.Feeds;
@@ -31,9 +30,9 @@ namespace MojoMVC.Controllers
 
                 return PartialView("~/Views/_Partials/_Feeds.cshtml", feedViewModels);
             }
-            catch (Exception ex)
+            catch
             {
-                ModelState.AddModelError("FeedUrl", $"Unable to retrieve RSS feed");
+                ModelState.AddModelError("FeedUrl", @"Unable to retrieve RSS feed");
 
                 return View("Index", input);
             }

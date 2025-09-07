@@ -13,13 +13,14 @@ namespace MojoMVC.Infrastructure
             {
                 throw new ArgumentNullException(nameof(stream), "Stream parameter cannot be null.");
             }
+
             using (var fileStream = stream)
             {
                 var serializer = new XmlSerializer(typeof(RssFeed));
-    
+
                 var myFeed = (RssFeed)serializer.Deserialize(fileStream);
-    
-                return myFeed.Channel;                       
+
+                return myFeed.Channel;
             }
         }
     }

@@ -8,7 +8,7 @@
         public string Link { get; set; }
         public string Guid { get; set; }
         public string PublishedDate { get; set; }
-        
+
         public int DbFeedId { get; set; }
         public virtual DbFeed DbFeed { get; set; }
     }

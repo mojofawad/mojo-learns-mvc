@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using MojoMVC.Models.ViewModels.Interfaces;
 
@@ -17,14 +18,10 @@ namespace MojoMVC.Models.ViewModels.Feeds
                 FeedItems.Add(new WebFeedItemViewModel(item));
             }
         }
-        
+
         public string Title { get; set; }
         public string Description { get; set; }
         public string Link { get; set; }
         public List<IFeedItemViewModel> FeedItems { get; set; }
-        public IEnumerator GetEnumerator()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

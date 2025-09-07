@@ -13,7 +13,7 @@ namespace MojoMVC.Models.ViewModels.Feeds
             Guid = item.Guid;
             PublishedDate = item.PublishedDate;
         }
-        
+
         public string Title { get; set; }
         public string Description { get; set; }
         public string Link { get; set; }

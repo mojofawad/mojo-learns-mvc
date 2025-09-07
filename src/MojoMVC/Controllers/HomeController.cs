@@ -13,12 +13,12 @@ namespace MojoMVC.Controllers
         {
             var rssFeed = await RssService.RetrieveRssFeed();
             var dbFeedItems = await FeedRepository.GetFeedsFromDb();
-            
+
             var webFeedViewModel = new WebFeedViewModel(rssFeed);
             var dbFeedViewModels = dbFeedItems.Select(f => new DbFeedViewModel(f)).ToList();
-            
+
             var model = new HomeIndexViewModel(webFeedViewModel, dbFeedViewModels);
-            
+
             return View(model);
         }
 

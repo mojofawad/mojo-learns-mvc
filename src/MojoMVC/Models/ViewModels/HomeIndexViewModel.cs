@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using MojoMVC.Models.Entities;
 using MojoMVC.Models.ViewModels.Feeds;
 using MojoMVC.Models.ViewModels.Interfaces;
 

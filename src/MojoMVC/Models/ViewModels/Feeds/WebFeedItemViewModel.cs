@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MojoMVC.Models.ViewModels.Interfaces;
+﻿using MojoMVC.Models.ViewModels.Interfaces;
 
 namespace MojoMVC.Models.ViewModels.Feeds
 {
