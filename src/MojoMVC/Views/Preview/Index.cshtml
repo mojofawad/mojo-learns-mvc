@@ -1,9 +1,20 @@
-﻿@{
+﻿@model MojoMVC.Models.ViewModels.Forms.PreviewInput
+
+@{
     ViewBag.Title = "Preview RSS Feed";
 }
 
 <main>
     <section class="row" aria-labelledby="aspnetTitle">
         <h1 id="title">Preview Feed</h1>
+        <h3>Sample Link</h3>
+        <code>https://feeds.megaphone.fm/FSI1483080183</code>
+        
+        @using(Html.BeginForm("PreviewFeed", "Preview"))
+        {
+            @Html.EditorForModel()
+            <button type="submit">Preview</button>
+        }
+        
     </section>
 </main>
