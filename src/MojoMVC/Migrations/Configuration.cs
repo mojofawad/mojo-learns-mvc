@@ -68,7 +68,7 @@ namespace MojoMVC.Migrations
                     Id = 4,
                     Title = "Google's Second Feed Item",
                     Description = "Second Feed Item by Google",
-                    Link = "https://www.google.com/search?q=asp+net+mvc&client=firefox-b-1-d&sca_esv=f92416c7ac1eaa91&sxsrf=AE3TifN2qDPIuzVV3Sx1SQcSDyP6GXrXOw%3A1757266230003&ei=NcG9aJ34PNLLp84PuOG4uAw&ved=0ahUKEwjd5qjrlsePAxXS5ckDHbgwDscQ4dUDCBA&uact=5&oq=asp+net+mvc&gs_lp=Egxnd3Mtd2l6LXNlcnAiC2FzcCBuZXQgbXZjMgQQIxgnMgoQIxiABBgnGIoFMgQQIxgnMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABDIFEAAYgAQyBRAAGIAEMgUQABiABEjAD1D-BVjgDnADeAGQAQCYAZQBoAGbCKoBAzguM7gBA8gBAPgBAZgCDqAC2wjCAgoQABiwAxjWBBhHwgINEAAYgAQYsAMYQxiKBcICDhAAGIAEGLEDGIMBGIoFwgIREC4YgAQYsQMY0QMYgwEYxwHCAgsQLhiABBjRAxjHAcICChAAGIAEGEMYigXCAg4QLhiABBixAxjRAxjHAcICDhAuGIAEGLEDGIMBGIoFwgILEAAYgAQYkQIYigXCAhYQLhiABBixAxjRAxgUGIcCGMcBGMkDwgILEAAYgAQYkgMYigXCAgoQLhiABBhDGIoFwgINEAAYgAQYsQMYFBiHAsICCBAAGIAEGLEDwgINEC4YgAQYsQMYFBiHAsICChAAGIAEGBQYhwKYAwCIBgGQBgqSBwQxMC40oAeEgAGyBwM3LjS4B80IwgcEMi0xNMgHNA&sclient=gws-wiz-serp",
+                    Link = "https://www.google.com/search?q=asp+net+mvc",
                     Guid = "60ebcf5e-9ce8-4bf4-ac5b-72532853c189",
                     PublishedDate = "2025-01-03",
                     DbFeedId = 1
