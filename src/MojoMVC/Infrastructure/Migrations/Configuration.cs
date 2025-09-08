@@ -1,8 +1,7 @@
 ﻿using System.Data.Entity.Migrations;
-using MojoMVC.Infrastructure;
 using MojoMVC.Models.Entities;
 
-namespace MojoMVC.Migrations
+namespace MojoMVC.Infrastructure.Migrations
 {
     internal sealed class Configuration : DbMigrationsConfiguration<MojoDbContext>
     {

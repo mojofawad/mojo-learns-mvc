@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using MojoMVC.Models.ViewModels.Feeds;
-using MojoMVC.Models.ViewModels.Forms;
-using MojoMVC.Models.ViewModels.Interfaces;
+using MojoMVC.Infrastructure;
+using MojoMVC.ViewModels.Feeds;
+using MojoMVC.ViewModels.Forms;
+using MojoMVC.ViewModels.Interfaces;
 
 namespace MojoMVC.Controllers
 {
@@ -12,7 +13,7 @@ namespace MojoMVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View(new PreviewInput());
+            return View();
         }
 
         [HttpPost]
@@ -25,7 +26,9 @@ namespace MojoMVC.Controllers
 
             try
             {
-                var feed = await RssService.RetrieveRssFeed(input.FeedUrl);
+                var rssClient = new RssClient();
+                var feed = await rssClient.FetchRssFromUrl(input.FeedUrl);
+                
                 var feedViewModels = new List<IFeedViewModel> { new WebFeedViewModel(feed) };
 
                 return PartialView("~/Views/_Partials/_Feeds.cshtml", feedViewModels);

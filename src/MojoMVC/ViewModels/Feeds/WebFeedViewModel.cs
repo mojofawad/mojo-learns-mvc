@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using MojoMVC.Models.ViewModels.Interfaces;
+﻿using System.Collections.Generic;
+using MojoMVC.Models;
+using MojoMVC.ViewModels.Interfaces;
 
-namespace MojoMVC.Models.ViewModels.Feeds
+namespace MojoMVC.ViewModels.Feeds
 {
     public class WebFeedViewModel : IFeedViewModel
     {

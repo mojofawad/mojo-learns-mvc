@@ -1,4 +1,4 @@
-﻿namespace MojoMVC.Models.ViewModels.Interfaces
+﻿namespace MojoMVC.ViewModels.Interfaces
 {
     public interface IFeedItemViewModel
     {

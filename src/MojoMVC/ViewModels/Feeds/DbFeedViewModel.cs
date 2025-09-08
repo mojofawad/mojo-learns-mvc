@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using MojoMVC.Models.Entities;
-using MojoMVC.Models.ViewModels.Interfaces;
+using MojoMVC.ViewModels.Interfaces;
 
-namespace MojoMVC.Models.ViewModels.Feeds
+namespace MojoMVC.ViewModels.Feeds
 {
     public class DbFeedViewModel : IFeedViewModel
     {
