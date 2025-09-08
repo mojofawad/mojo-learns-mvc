@@ -1,6 +1,7 @@
-﻿using MojoMVC.Models.ViewModels.Interfaces;
+﻿using MojoMVC.Models;
+using MojoMVC.ViewModels.Interfaces;
 
-namespace MojoMVC.Models.ViewModels.Feeds
+namespace MojoMVC.ViewModels.Feeds
 {
     public class WebFeedItemViewModel : IFeedItemViewModel
     {

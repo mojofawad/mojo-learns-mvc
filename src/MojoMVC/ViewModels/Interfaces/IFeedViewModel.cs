@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MojoMVC.Models.ViewModels.Interfaces
+namespace MojoMVC.ViewModels.Interfaces
 {
     public interface IFeedViewModel
     {

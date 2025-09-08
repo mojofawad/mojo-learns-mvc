@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using MojoMVC.Infrastructure;
-using MojoMVC.Models.ViewModels;
-using MojoMVC.Models.ViewModels.Feeds;
+using MojoMVC.ViewModels;
+using MojoMVC.ViewModels.Feeds;
 
 namespace MojoMVC.Controllers
 {
@@ -11,7 +11,9 @@ namespace MojoMVC.Controllers
     {
         public async Task<ActionResult> Index()
         {
-            var rssFeed = await RssService.RetrieveRssFeed();
+            var rssClient = new RssClient();
+            var rssFeed = await rssClient.FetchRssFromUrl();
+            
             var dbFeedItems = await FeedRepository.GetFeedsFromDb();
 
             var webFeedViewModel = new WebFeedViewModel(rssFeed);

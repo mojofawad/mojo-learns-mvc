@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MojoMVC.Models.ViewModels.Forms
+namespace MojoMVC.ViewModels.Forms
 {
     public class PreviewInput
     {

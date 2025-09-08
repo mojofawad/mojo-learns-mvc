@@ -6,11 +6,12 @@ namespace MojoMVC.Infrastructure
 {
     public class RssClient
     {
-        private static readonly HttpClient httpClient = new HttpClient();
-
-        public async Task<WebFeed> FetchRssFromUrl(string url)
+        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly RssParser _parser = new RssParser();
+        
+        public async Task<WebFeed> FetchRssFromUrl(string url = "https://feeds.megaphone.fm/FSI1483080183")
         {
-            using (var response = await httpClient.GetAsync(url))
+            using (var response = await _httpClient.GetAsync(url))
             {
                 if (!response.IsSuccessStatusCode)
                 {
@@ -19,9 +20,8 @@ namespace MojoMVC.Infrastructure
                 }
 
                 var someData = await response.Content.ReadAsStreamAsync();
-
-                var parser = new RssParser();
-                return parser.DeserializeFeedFromStream(someData);
+                
+                return _parser.DeserializeFeedFromStream(someData);
             }
         }
     }

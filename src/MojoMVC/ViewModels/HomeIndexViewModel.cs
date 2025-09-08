@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using MojoMVC.Models.ViewModels.Feeds;
-using MojoMVC.Models.ViewModels.Interfaces;
+using MojoMVC.ViewModels.Feeds;
+using MojoMVC.ViewModels.Interfaces;
 
-namespace MojoMVC.Models.ViewModels
+namespace MojoMVC.ViewModels
 {
     public class HomeIndexViewModel
     {
