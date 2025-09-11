@@ -17,7 +17,7 @@ namespace MojoMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PreviewFeed(PreviewInput input)
+        public async Task<ActionResult> PreviewFeed(FeedUrlInput input)
         {
             if (!ModelState.IsValid)
             {

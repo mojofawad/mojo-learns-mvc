@@ -97,7 +97,7 @@
     <Compile Include="ViewModels\Feeds\DbFeedViewModel.cs" />
     <Compile Include="ViewModels\Feeds\WebFeedItemViewModel.cs" />
     <Compile Include="ViewModels\Feeds\WebFeedViewModel.cs" />
-    <Compile Include="ViewModels\Forms\PreviewInput.cs" />
+    <Compile Include="ViewModels\Forms\FeedUrlInput.cs" />
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IFeedItemViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IFeedViewModel.cs" />
