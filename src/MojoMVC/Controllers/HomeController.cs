@@ -1,9 +1,13 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using MojoMVC.Infrastructure;
 using MojoMVC.ViewModels;
 using MojoMVC.ViewModels.Feeds;
+using MojoMVC.ViewModels.Forms;
+using MojoMVC.ViewModels.Interfaces;
 
 namespace MojoMVC.Controllers
 {
@@ -24,18 +28,42 @@ namespace MojoMVC.Controllers
             return View(model);
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult AddFeed()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
-
-        public ActionResult Contact()
+        
+        [HttpPost]
+        public ActionResult AddFeed(FeedUrlInput input)
         {
-            ViewBag.Message = "Your contact page.";
+            Console.WriteLine($"AddFeed action called: { input.FeedUrl }");
+            return new HttpStatusCodeResult(200);
+        }
 
-            return View();
+        [HttpPost]
+        public async Task<ActionResult> PreviewFeed(FeedUrlInput input)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("Preview", input);
+            }
+
+            try
+            {
+                var rssClient = new RssClient();
+                var feed = await rssClient.FetchRssFromUrl(input.FeedUrl);
+                
+                var feedViewModels = new List<IFeedViewModel> { new WebFeedViewModel(feed) };
+
+                return PartialView("~/Views/_Partials/_Feeds.cshtml", feedViewModels);
+            }
+            catch
+            {
+                ModelState.AddModelError("FeedUrl", @"Unable to retrieve RSS feed");
+
+                return View("Preview", input);
+            }
         }
     }
 }
