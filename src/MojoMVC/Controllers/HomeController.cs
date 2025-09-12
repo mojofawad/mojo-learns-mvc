@@ -33,20 +33,13 @@ namespace MojoMVC.Controllers
         {
             return View();
         }
-        
-        [HttpPost]
-        public ActionResult AddFeed(FeedUrlInput input)
-        {
-            Console.WriteLine($"AddFeed action called: { input.FeedUrl }");
-            return new HttpStatusCodeResult(200);
-        }
 
         [HttpPost]
         public async Task<ActionResult> PreviewFeed(FeedUrlInput input)
         {
             if (!ModelState.IsValid)
             {
-                return View("Preview", input);
+                return View("AddFeed", input);
             }
 
             try
@@ -62,7 +55,7 @@ namespace MojoMVC.Controllers
             {
                 ModelState.AddModelError("FeedUrl", @"Unable to retrieve RSS feed");
 
-                return View("Preview", input);
+                return View("AddFeed", input);
             }
         }
     }

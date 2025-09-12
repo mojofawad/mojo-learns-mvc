@@ -24,6 +24,7 @@
             <div class="col-md-4">
                 @using (Ajax.BeginForm("PreviewFeed", "Home", new AjaxOptions
                             {
+                                HttpMethod = "POST",
                                 UpdateTargetId = "previewResults",
                                 OnSuccess = "initializeAddButton()",
                                 InsertionMode = InsertionMode.Replace
@@ -39,9 +40,11 @@
 
                     <input type="submit" class="my-2 btn btn-outline-primary" value="Preview"/>
                 }
-                @using (Ajax.BeginForm("AddFeed", "Home", new AjaxOptions
+                @using (Ajax.BeginForm(
+                            new AjaxOptions
                             {
                                 HttpMethod = "POST",
+                                Url = Url.Content("~/api/feeds"),
                                 OnBegin = "disableAddButton()",
                                 OnSuccess = "addValueToAddButton('Added!')",
                             }))
