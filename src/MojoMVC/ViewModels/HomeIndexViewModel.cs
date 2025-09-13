@@ -1,18 +1,17 @@
 ﻿using System.Collections.Generic;
-using MojoMVC.ViewModels.Feeds;
-using MojoMVC.ViewModels.Interfaces;
+using MojoMVC.Models.Entities;
 
 namespace MojoMVC.ViewModels
 {
     public class HomeIndexViewModel
     {
-        public HomeIndexViewModel(WebFeedViewModel webFeed, List<DbFeedViewModel> dbFeeds)
+        public HomeIndexViewModel(Feed webFeed, List<Feed> dbFeeds)
         {
-            WebFeeds = new List<IFeedViewModel> { webFeed };
-            DbFeeds = new List<IFeedViewModel>(dbFeeds);
+            WebFeeds = new List<Feed> { webFeed };
+            DbFeeds = new List<Feed>(dbFeeds);
         }
 
-        public List<IFeedViewModel> WebFeeds { get; set; }
-        public List<IFeedViewModel> DbFeeds { get; set; }
+        public IEnumerable<Feed> WebFeeds { get; set; }
+        public IEnumerable<Feed> DbFeeds { get; set; }
     }
 }

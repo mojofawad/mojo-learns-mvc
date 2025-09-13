@@ -2,7 +2,7 @@
 
 namespace MojoMVC.ViewModels.Forms
 {
-    public class PreviewInput
+    public class FeedUrlInput
     {
         [Required]
         [DataType(DataType.Url)]

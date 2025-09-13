@@ -1,4 +1,4 @@
-﻿@model MojoMVC.ViewModels.Forms.PreviewInput
+﻿@model MojoMVC.ViewModels.Forms.FeedUrlInput
 @{
     ViewBag.Title = "Preview RSS Feed";
 }
@@ -22,9 +22,11 @@
 
         <div class="row">
             <div class="col-md-4">
-                @using (Ajax.BeginForm("PreviewFeed", "Preview", new AjaxOptions
+                @using (Ajax.BeginForm("PreviewFeed", "Home", new AjaxOptions
                             {
+                                HttpMethod = "POST",
                                 UpdateTargetId = "previewResults",
+                                OnSuccess = "initializeAddButton()",
                                 InsertionMode = InsertionMode.Replace
                             }))
                 {
@@ -37,6 +39,19 @@
                     </div>
 
                     <input type="submit" class="my-2 btn btn-outline-primary" value="Preview"/>
+                }
+                @using (Ajax.BeginForm(
+                            new AjaxOptions
+                            {
+                                HttpMethod = "POST",
+                                Url = Url.Content("~/api/feeds"),
+                                OnBegin = "disableAddButton()",
+                                OnSuccess = "addValueToAddButton('Added!')",
+                            }))
+                {
+                    @Html.HiddenFor(m => m.FeedUrl, new { id = "FeedToAdd" })
+                    <input id="addFeedButton" type="submit" class="my-2 btn btn-outline-success" value="Add Feed"
+                           disabled/>
                 }
             </div>
             <div class="col-md-8">
@@ -56,5 +71,36 @@
                 button.innerText = originalText;
             }, 1000);
         });
+    }
+
+    function initializeAddButton() {
+        const addButton = document.getElementById("addFeedButton");
+        const feedUrlInput = document.getElementById("FeedToAdd");
+        const feedUrlFormInput = document.getElementById("FeedUrl");
+
+        if (addButton && feedUrlInput && feedUrlFormInput) {
+            addButton.disabled = false;
+            addButton.value = "Add Feed";
+            feedUrlInput.value = feedUrlFormInput.value;
+        }
+    }
+
+    function disableAddButton() {
+        const addButton = document.getElementById("addFeedButton");
+        if (addButton) {
+            addButton.disabled = true;
+            addButton.value = "Adding...";
+        }
+    }
+    
+    function addValueToAddButton(newValue) {
+        const addButton = document.getElementById("addFeedButton");
+        if (addButton) {
+            addButton.value = newValue;
+            setTimeout(() => {
+                addButton.value = "Add Feed";
+                addButton.disabled = false;
+            }, 1000);
+        }
     }
 </script>

@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Annotations;
 using MojoMVC.Models.Entities;
 
 namespace MojoMVC.Infrastructure
@@ -9,7 +11,15 @@ namespace MojoMVC.Infrastructure
         {
         }
 
-        public DbSet<DbFeed> Feeds { get; set; }
-        public DbSet<DbFeedItem> FeedItems { get; set; }
+        public DbSet<Feed> Feeds { get; set; }
+        public DbSet<FeedItem> FeedItems { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Feed>()
+                .Property(t => t.Link)
+                .HasColumnAnnotation("Index", new  IndexAnnotation(new IndexAttribute { IsUnique = true }))
+                .HasMaxLength(450);
+        }
     }
 }

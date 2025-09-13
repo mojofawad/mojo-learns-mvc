@@ -1,0 +1,23 @@
+﻿using System.Web.Http;
+using MojoMVC.Infrastructure;
+using MojoMVC.ViewModels.Forms;
+
+namespace MojoMVC.ApiControllers
+{
+    [RoutePrefix("api/feeds")]
+    public class FeedsController : ApiController
+    {
+        [Route("")]
+        public IHttpActionResult Post(FeedUrlInput input)
+        {
+            var rssClient = new RssClient();
+            var feed = rssClient.GetFeedFromUrl(input.FeedUrl);
+
+            var repository = new FeedsRepository();
+            
+            repository.AddFeed(feed);
+            
+            return Ok();
+        }
+    }
+}

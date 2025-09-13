@@ -1,41 +1,56 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using MojoMVC.Infrastructure;
+using MojoMVC.Models.Entities;
 using MojoMVC.ViewModels;
-using MojoMVC.ViewModels.Feeds;
+using MojoMVC.ViewModels.Forms;
 
 namespace MojoMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly FeedsRepository _repository = new FeedsRepository();
+        private readonly RssClient _rssClient = new RssClient();
+        
         public async Task<ActionResult> Index()
         {
-            var rssClient = new RssClient();
-            var rssFeed = await rssClient.FetchRssFromUrl();
+            var feedFromWeb = _rssClient.GetFeedFromUrl();
+            var feedsFromDb = await _repository.GetFeeds();
             
-            var dbFeedItems = await FeedRepository.GetFeedsFromDb();
-
-            var webFeedViewModel = new WebFeedViewModel(rssFeed);
-            var dbFeedViewModels = dbFeedItems.Select(f => new DbFeedViewModel(f)).ToList();
-
-            var model = new HomeIndexViewModel(webFeedViewModel, dbFeedViewModels);
+            var model = new HomeIndexViewModel(feedFromWeb, feedsFromDb);
 
             return View(model);
         }
 
-        public ActionResult About()
+        [HttpGet]
+        public ActionResult AddFeed()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult PreviewFeed(FeedUrlInput input)
         {
-            ViewBag.Message = "Your contact page.";
+            if (!ModelState.IsValid)
+            {
+                return View("AddFeed", input);
+            }
 
-            return View();
+            try
+            {
+                var feed = _rssClient.GetFeedFromUrl(input.FeedUrl);
+                
+                var feeds = new List<Feed>{ feed };
+                
+                return PartialView("~/Views/_Partials/_Feeds.cshtml", feeds);
+            }
+            catch
+            {
+                ModelState.AddModelError("FeedUrl", @"Unable to retrieve RSS feed");
+
+                return View("AddFeed", input);
+            }
         }
     }
 }
