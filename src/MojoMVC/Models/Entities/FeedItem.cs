@@ -9,7 +9,7 @@
         public string Guid { get; set; }
         public string PublishedDate { get; set; }
 
-        public int DbFeedId { get; set; }
+        public int FeedId { get; set; }
         public virtual Feed Feed { get; set; }
     }
 }

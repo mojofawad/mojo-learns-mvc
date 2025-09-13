@@ -48,7 +48,7 @@ namespace MojoMVC.Infrastructure.Migrations
                     Link = "https://www.google.com/search?q=guid+generator",
                     Guid = "57c4df7e-410b-4180-84d6-812dfbeda869",
                     PublishedDate = "2025-01-01",
-                    DbFeedId = 1
+                    FeedId = 1
                 },
                 new FeedItem()
                 {
@@ -58,7 +58,7 @@ namespace MojoMVC.Infrastructure.Migrations
                     Link = "https://learn.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-3",
                     Guid = "205ebf5a-38c3-4d65-b904-046e9ed8e0e6",
                     PublishedDate = "2025-01-01",
-                    DbFeedId = 2
+                    FeedId = 2
                 },
                 new FeedItem()
                 {
@@ -68,7 +68,7 @@ namespace MojoMVC.Infrastructure.Migrations
                     Link = "https://dotnet.microsoft.com/en-us/apps/aspnet/mvc",
                     Guid = "83f03a70-3664-40ac-a69d-9cf5f508a8cc",
                     PublishedDate = "2025-01-02",
-                    DbFeedId = 2
+                    FeedId = 2
                 },
                 new FeedItem()
                 {
@@ -78,7 +78,7 @@ namespace MojoMVC.Infrastructure.Migrations
                     Link = "https://www.google.com/search?q=asp+net+mvc",
                     Guid = "60ebcf5e-9ce8-4bf4-ac5b-72532853c189",
                     PublishedDate = "2025-01-03",
-                    DbFeedId = 1
+                    FeedId = 1
                 }
             );
 

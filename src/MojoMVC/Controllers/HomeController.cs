@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using MojoMVC.Infrastructure;
+using MojoMVC.Models.Entities;
 using MojoMVC.ViewModels;
-using MojoMVC.ViewModels.Feeds;
 using MojoMVC.ViewModels.Forms;
-using MojoMVC.ViewModels.Interfaces;
 
 namespace MojoMVC.Controllers
 {
@@ -17,13 +15,10 @@ namespace MojoMVC.Controllers
         
         public async Task<ActionResult> Index()
         {
-            var rssFeed = _rssClient.GetFeedFromUrl();
-            var dbFeeds = await _repository.GetFeeds();
+            var feedFromWeb = _rssClient.GetFeedFromUrl();
+            var feedsFromDb = await _repository.GetFeeds();
             
-            var feedFromWeb = new DbFeedViewModel(rssFeed);
-            var feedFromDb = dbFeeds.Select(f => new DbFeedViewModel(f)).ToList();
-
-            var model = new HomeIndexViewModel(feedFromWeb, feedFromDb);
+            var model = new HomeIndexViewModel(feedFromWeb, feedsFromDb);
 
             return View(model);
         }
@@ -46,9 +41,9 @@ namespace MojoMVC.Controllers
             {
                 var feed = _rssClient.GetFeedFromUrl(input.FeedUrl);
                 
-                var feedViewModels = new List<IFeedViewModel> { new DbFeedViewModel(feed) };
-
-                return PartialView("~/Views/_Partials/_Feeds.cshtml", feedViewModels);
+                var feeds = new List<Feed>{ feed };
+                
+                return PartialView("~/Views/_Partials/_Feeds.cshtml", feeds);
             }
             catch
             {

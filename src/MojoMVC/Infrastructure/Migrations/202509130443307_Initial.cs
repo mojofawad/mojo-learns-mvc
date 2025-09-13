@@ -17,12 +17,11 @@
                         Link = c.String(),
                         Guid = c.String(),
                         PublishedDate = c.String(),
-                        DbFeedId = c.Int(nullable: false),
-                        Feed_Id = c.Int(),
+                        FeedId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Feeds", t => t.Feed_Id)
-                .Index(t => t.Feed_Id);
+                .ForeignKey("dbo.Feeds", t => t.FeedId, cascadeDelete: true)
+                .Index(t => t.FeedId);
             
             CreateTable(
                 "dbo.Feeds",
@@ -40,9 +39,9 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.FeedItems", "Feed_Id", "dbo.Feeds");
+            DropForeignKey("dbo.FeedItems", "FeedId", "dbo.Feeds");
             DropIndex("dbo.Feeds", new[] { "Link" });
-            DropIndex("dbo.FeedItems", new[] { "Feed_Id" });
+            DropIndex("dbo.FeedItems", new[] { "FeedId" });
             DropTable("dbo.Feeds");
             DropTable("dbo.FeedItems");
         }
