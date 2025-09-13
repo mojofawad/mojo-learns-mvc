@@ -78,10 +78,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\FeedRepository.cs" />
+    <Compile Include="Infrastructure\FeedsRepository.cs" />
     <Compile Include="Infrastructure\Migrations\202509071810344_Initial.cs" />
     <Compile Include="Infrastructure\Migrations\202509071810344_Initial.Designer.cs">
       <DependentUpon>202509071810344_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\Migrations\202509130057160_MakeFeedLinksUnique.cs" />
+    <Compile Include="Infrastructure\Migrations\202509130057160_MakeFeedLinksUnique.Designer.cs">
+      <DependentUpon>202509130057160_MakeFeedLinksUnique.cs</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Migrations\Configuration.cs" />
     <Compile Include="Infrastructure\MojoDbContext.cs" />
@@ -186,6 +190,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Infrastructure\Migrations\202509071810344_Initial.resx">
       <DependentUpon>202509071810344_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infrastructure\Migrations\202509130057160_MakeFeedLinksUnique.resx">
+      <DependentUpon>202509130057160_MakeFeedLinksUnique.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

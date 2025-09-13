@@ -9,7 +9,7 @@ namespace MojoMVC.Infrastructure
         private readonly HttpClient _httpClient = new HttpClient();
         private readonly RssParser _parser = new RssParser();
         
-        public async Task<WebFeed> FetchRssFromUrl(string url = "https://feeds.megaphone.fm/FSI1483080183")
+        public async Task<WebFeed> GetRssFeed(string url = "https://feeds.megaphone.fm/FSI1483080183")
         {
             using (var response = await _httpClient.GetAsync(url))
             {

@@ -5,25 +5,25 @@ using MojoMVC.Models.Entities;
 
 namespace MojoMVC.Infrastructure
 {
-    public class FeedRepository
+    public class FeedsRepository
     {
-        public static async Task<List<DbFeedItem>> GetFeedItemsFromDb()
-        {
-            using (var context = new MojoDbContext())
-            {
-                return await context.FeedItems
-                    .Include(fi => fi.DbFeed)
-                    .ToListAsync();
-            }
-        }
-
-        public static async Task<List<DbFeed>> GetFeedsFromDb()
+        public static async Task<List<DbFeed>> GetFeeds()
         {
             using (var context = new MojoDbContext())
             {
                 return await context.Feeds
                     .Include(f => f.FeedItems)
                     .ToListAsync();
+            }
+        }
+
+        public void AddFeed(DbFeed feed)
+        {
+            using (var context = new MojoDbContext())
+            {
+                context.Feeds.Add(feed);
+                
+                context.SaveChanges();
             }
         }
     }

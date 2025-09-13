@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
+using MojoMVC.Infrastructure;
+using MojoMVC.Models.Entities;
 using MojoMVC.ViewModels.Forms;
 
 namespace MojoMVC.ApiControllers
@@ -10,16 +13,30 @@ namespace MojoMVC.ApiControllers
     public class FeedsController : ApiController
     {
         [Route("")]
-        public HttpResponseMessage Get()
+        public IHttpActionResult Get()
         {
-            return new HttpResponseMessage(HttpStatusCode.Accepted);
+            return Ok();
         }
         
+        // QUESTION: Difference between IHttpActionResult and HttpResponseMessage
+        // QUESTION: is Task<IHttpActionResult> a double Task? 
         [Route("")]
-        public HttpResponseMessage Post(FeedUrlInput input)
+        public async Task<IHttpActionResult> Post(FeedUrlInput input)
         {
-            Console.WriteLine($"AddFeed action called: { input.FeedUrl }");
-            return new HttpResponseMessage(HttpStatusCode.Accepted);
+            var rssClient = new RssClient();
+            var rssFeed = await rssClient.GetRssFeed(input.FeedUrl);
+
+            var feed = new DbFeed
+            {
+                Title = rssFeed.Title,
+                Description = rssFeed.Description,
+                Link = input.FeedUrl
+            };
+
+            var repository = new FeedsRepository();
+            repository.AddFeed(feed);
+            
+            return Ok();
         }
     }
 }

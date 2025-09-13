@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -16,9 +15,9 @@ namespace MojoMVC.Controllers
         public async Task<ActionResult> Index()
         {
             var rssClient = new RssClient();
-            var rssFeed = await rssClient.FetchRssFromUrl();
+            var rssFeed = await rssClient.GetRssFeed();
             
-            var dbFeedItems = await FeedRepository.GetFeedsFromDb();
+            var dbFeedItems = await FeedsRepository.GetFeeds();
 
             var webFeedViewModel = new WebFeedViewModel(rssFeed);
             var dbFeedViewModels = dbFeedItems.Select(f => new DbFeedViewModel(f)).ToList();
@@ -45,7 +44,7 @@ namespace MojoMVC.Controllers
             try
             {
                 var rssClient = new RssClient();
-                var feed = await rssClient.FetchRssFromUrl(input.FeedUrl);
+                var feed = await rssClient.GetRssFeed(input.FeedUrl);
                 
                 var feedViewModels = new List<IFeedViewModel> { new WebFeedViewModel(feed) };
 
