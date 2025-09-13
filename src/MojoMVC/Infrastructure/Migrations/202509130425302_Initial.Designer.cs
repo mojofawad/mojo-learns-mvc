@@ -7,13 +7,13 @@ namespace MojoMVC.Infrastructure.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.5.1")]
-    public sealed partial class MakeFeedLinksUnique : IMigrationMetadata
+    public sealed partial class Initial : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(MakeFeedLinksUnique));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
         
         string IMigrationMetadata.Id
         {
-            get { return "202509130057160_MakeFeedLinksUnique"; }
+            get { return "202509130425302_Initial"; }
         }
         
         string IMigrationMetadata.Source

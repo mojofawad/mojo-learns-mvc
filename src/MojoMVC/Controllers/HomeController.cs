@@ -12,17 +12,18 @@ namespace MojoMVC.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly FeedsRepository _repository = new FeedsRepository();
+        private readonly RssClient _rssClient = new RssClient();
+        
         public async Task<ActionResult> Index()
         {
-            var rssClient = new RssClient();
-            var rssFeed = await rssClient.GetRssFeed();
+            var rssFeed = _rssClient.GetFeedFromUrl();
+            var dbFeeds = await _repository.GetFeeds();
             
-            var dbFeedItems = await FeedsRepository.GetFeeds();
+            var feedFromWeb = new DbFeedViewModel(rssFeed);
+            var feedFromDb = dbFeeds.Select(f => new DbFeedViewModel(f)).ToList();
 
-            var webFeedViewModel = new WebFeedViewModel(rssFeed);
-            var dbFeedViewModels = dbFeedItems.Select(f => new DbFeedViewModel(f)).ToList();
-
-            var model = new HomeIndexViewModel(webFeedViewModel, dbFeedViewModels);
+            var model = new HomeIndexViewModel(feedFromWeb, feedFromDb);
 
             return View(model);
         }
@@ -34,7 +35,7 @@ namespace MojoMVC.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> PreviewFeed(FeedUrlInput input)
+        public ActionResult PreviewFeed(FeedUrlInput input)
         {
             if (!ModelState.IsValid)
             {
@@ -43,10 +44,9 @@ namespace MojoMVC.Controllers
 
             try
             {
-                var rssClient = new RssClient();
-                var feed = await rssClient.GetRssFeed(input.FeedUrl);
+                var feed = _rssClient.GetFeedFromUrl(input.FeedUrl);
                 
-                var feedViewModels = new List<IFeedViewModel> { new WebFeedViewModel(feed) };
+                var feedViewModels = new List<IFeedViewModel> { new DbFeedViewModel(feed) };
 
                 return PartialView("~/Views/_Partials/_Feeds.cshtml", feedViewModels);
             }

@@ -48,6 +48,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -79,28 +80,18 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\FeedsRepository.cs" />
-    <Compile Include="Infrastructure\Migrations\202509071810344_Initial.cs" />
-    <Compile Include="Infrastructure\Migrations\202509071810344_Initial.Designer.cs">
-      <DependentUpon>202509071810344_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Migrations\202509130057160_MakeFeedLinksUnique.cs" />
-    <Compile Include="Infrastructure\Migrations\202509130057160_MakeFeedLinksUnique.Designer.cs">
-      <DependentUpon>202509130057160_MakeFeedLinksUnique.cs</DependentUpon>
+    <Compile Include="Infrastructure\Migrations\202509130425302_Initial.cs" />
+    <Compile Include="Infrastructure\Migrations\202509130425302_Initial.Designer.cs">
+      <DependentUpon>202509130425302_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Migrations\Configuration.cs" />
     <Compile Include="Infrastructure\MojoDbContext.cs" />
     <Compile Include="Infrastructure\RssClient.cs" />
-    <Compile Include="Infrastructure\RssParser.cs" />
-    <Compile Include="Models\Entities\DbFeed.cs" />
-    <Compile Include="Models\Entities\DbFeedItem.cs" />
-    <Compile Include="Models\WebFeed.cs" />
-    <Compile Include="Models\FeedItem.cs" />
-    <Compile Include="Models\RssFeed.cs" />
+    <Compile Include="Models\Entities\Feed.cs" />
+    <Compile Include="Models\Entities\FeedItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\Feeds\DbFeedItemViewModel.cs" />
     <Compile Include="ViewModels\Feeds\DbFeedViewModel.cs" />
-    <Compile Include="ViewModels\Feeds\WebFeedItemViewModel.cs" />
-    <Compile Include="ViewModels\Feeds\WebFeedViewModel.cs" />
     <Compile Include="ViewModels\Forms\FeedUrlInput.cs" />
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\IFeedItemViewModel.cs" />
@@ -188,14 +179,6 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Infrastructure\Migrations\202509071810344_Initial.resx">
-      <DependentUpon>202509071810344_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Infrastructure\Migrations\202509130057160_MakeFeedLinksUnique.resx">
-      <DependentUpon>202509130057160_MakeFeedLinksUnique.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Antlr" Version="3.5.0.2" />
     <PackageReference Include="bootstrap" Version="5.3.8" />
     <PackageReference Include="EntityFramework" Version="6.5.1" />
@@ -213,6 +196,11 @@
     <PackageReference Include="Modernizr" Version="2.8.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="WebGrease" Version="1.6.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Infrastructure\Migrations\202509130425302_Initial.resx">
+      <DependentUpon>202509130425302_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

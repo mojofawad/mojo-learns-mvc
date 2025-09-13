@@ -11,12 +11,12 @@ namespace MojoMVC.Infrastructure
         {
         }
 
-        public DbSet<DbFeed> Feeds { get; set; }
-        public DbSet<DbFeedItem> FeedItems { get; set; }
+        public DbSet<Feed> Feeds { get; set; }
+        public DbSet<FeedItem> FeedItems { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<DbFeed>()
+            modelBuilder.Entity<Feed>()
                 .Property(t => t.Link)
                 .HasColumnAnnotation("Index", new  IndexAnnotation(new IndexAttribute { IsUnique = true }))
                 .HasMaxLength(450);

@@ -12,7 +12,7 @@ namespace MojoMVC.Infrastructure.Migrations
 
         protected override void Seed(MojoDbContext context)
         {
-            var googleFeed = new DbFeed()
+            var googleFeed = new Feed()
             {
                 Id = 1,
                 Title = "Google Feed",
@@ -20,19 +20,27 @@ namespace MojoMVC.Infrastructure.Migrations
                 Link = "https://google.com"
             };
 
-            var microsoftFeed = new DbFeed()
+            var microsoftFeed = new Feed()
             {
                 Id = 2,
                 Title = "Microsoft Feed",
                 Description = "This is Microsoft",
                 Link = "https://microsoft.com"
             };
+            
+            var kellabyteFeed = new Feed()
+            {
+                Id = 3,
+                Title = "kellabyte",
+                Description = "Backend Brat. Distributed Diva.",
+                Link = "https://kellabyte.substack.com/feed"
+            };
 
-            context.Feeds.AddOrUpdate(x => x.Id, googleFeed, microsoftFeed);
+            context.Feeds.AddOrUpdate(x => x.Id, googleFeed, microsoftFeed, kellabyteFeed);
             context.SaveChanges();
 
             context.FeedItems.AddOrUpdate(x => x.Id,
-                new DbFeedItem()
+                new FeedItem()
                 {
                     Id = 1,
                     Title = "Google's First Feed Item",
@@ -42,7 +50,7 @@ namespace MojoMVC.Infrastructure.Migrations
                     PublishedDate = "2025-01-01",
                     DbFeedId = 1
                 },
-                new DbFeedItem()
+                new FeedItem()
                 {
                     Id = 2,
                     Title = "Microsoft's First Feed Item",
@@ -52,7 +60,7 @@ namespace MojoMVC.Infrastructure.Migrations
                     PublishedDate = "2025-01-01",
                     DbFeedId = 2
                 },
-                new DbFeedItem()
+                new FeedItem()
                 {
                     Id = 3,
                     Title = "Microsoft's Second Feed Item",
@@ -62,7 +70,7 @@ namespace MojoMVC.Infrastructure.Migrations
                     PublishedDate = "2025-01-02",
                     DbFeedId = 2
                 },
-                new DbFeedItem()
+                new FeedItem()
                 {
                     Id = 4,
                     Title = "Google's Second Feed Item",

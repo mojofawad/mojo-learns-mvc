@@ -6,7 +6,7 @@ namespace MojoMVC.ViewModels
 {
     public class HomeIndexViewModel
     {
-        public HomeIndexViewModel(WebFeedViewModel webFeed, List<DbFeedViewModel> dbFeeds)
+        public HomeIndexViewModel(DbFeedViewModel webFeed, List<DbFeedViewModel> dbFeeds)
         {
             WebFeeds = new List<IFeedViewModel> { webFeed };
             DbFeeds = new List<IFeedViewModel>(dbFeeds);

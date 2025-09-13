@@ -1,28 +1,39 @@
-﻿using System.Net.Http;
-using System.Threading.Tasks;
-using MojoMVC.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.ServiceModel.Syndication;
+using System.Xml;
+using MojoMVC.Models.Entities;
 
 namespace MojoMVC.Infrastructure
 {
     public class RssClient
     {
-        private readonly HttpClient _httpClient = new HttpClient();
-        private readonly RssParser _parser = new RssParser();
-        
-        public async Task<WebFeed> GetRssFeed(string url = "https://feeds.megaphone.fm/FSI1483080183")
+        public Feed GetFeedFromUrl(string url = "https://feeds.megaphone.fm/FSI1483080183")
         {
-            using (var response = await _httpClient.GetAsync(url))
-            {
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new HttpRequestException(
-                        $"Failed to fetch feed from URL '{url}'. Status code: {(int)response.StatusCode} {response.StatusCode}.");
-                }
+            var reader = XmlReader.Create(url);
+            var feed = SyndicationFeed.Load(reader);
 
-                var someData = await response.Content.ReadAsStreamAsync();
-                
-                return _parser.DeserializeFeedFromStream(someData);
+            var dbFeed = new Feed
+            {
+                Title = feed.Title.Text,
+                Description = feed.Description.Text,
+                Link = url,
+                FeedItems = new List<FeedItem>()
+            };
+
+            foreach (var item in feed.Items)
+            {
+                dbFeed.FeedItems.Add(new FeedItem
+                {
+                    Title = item.Title.Text,
+                    Description = item.Summary?.Text ?? string.Empty,
+                    Link = item.Links.FirstOrDefault()?.Uri.ToString() ?? string.Empty,
+                    Guid = item.Id,
+                    PublishedDate = item.PublishDate.UtcDateTime.ToString("u")
+                });
             }
+
+            return dbFeed;
         }
     }
 }

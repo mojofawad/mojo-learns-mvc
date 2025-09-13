@@ -7,24 +7,20 @@ namespace MojoMVC.Infrastructure
 {
     public class FeedsRepository
     {
-        public static async Task<List<DbFeed>> GetFeeds()
+        private readonly MojoDbContext _context = new MojoDbContext();
+
+        public async Task<List<Feed>> GetFeeds()
         {
-            using (var context = new MojoDbContext())
-            {
-                return await context.Feeds
-                    .Include(f => f.FeedItems)
-                    .ToListAsync();
-            }
+            return await _context.Feeds
+                .Include(f => f.FeedItems)
+                .ToListAsync();
         }
 
-        public void AddFeed(DbFeed feed)
+        public void AddFeed(Feed feed)
         {
-            using (var context = new MojoDbContext())
-            {
-                context.Feeds.Add(feed);
-                
-                context.SaveChanges();
-            }
+            _context.Feeds.Add(feed);
+            
+            _context.SaveChanges();
         }
     }
 }

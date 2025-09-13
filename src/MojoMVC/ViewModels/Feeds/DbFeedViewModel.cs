@@ -6,7 +6,7 @@ namespace MojoMVC.ViewModels.Feeds
 {
     public class DbFeedViewModel : IFeedViewModel
     {
-        public DbFeedViewModel(DbFeed feed)
+        public DbFeedViewModel(Feed feed)
         {
             Title = feed.Title;
             Description = feed.Description;
