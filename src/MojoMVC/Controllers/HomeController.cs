@@ -52,5 +52,13 @@ namespace MojoMVC.Controllers
                 return View("AddFeed", input);
             }
         }
+
+        public ActionResult GetFeedById(int feedId)
+        {
+            var feed = _repository.GetFeedById(feedId);
+            var feeds = new List<Feed>{ feed };
+            
+            return PartialView("~/Views/_Partials/_Feeds.cshtml", feeds);
+        }
     }
 }
