@@ -11,11 +11,11 @@ namespace MojoMVC.ApiControllers
         public IHttpActionResult Post(FeedUrlInput input)
         {
             var rssClient = new RssClient();
-            var feed = rssClient.GetFeedFromUrl(input.FeedUrl);
+            var feed = rssClient.GetFeedSourceFromUrl(input.FeedUrl);
 
             var repository = new FeedsRepository();
             
-            repository.AddFeed(feed);
+            repository.AddFeedSource(feed);
             
             return Ok();
         }

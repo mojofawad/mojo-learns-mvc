@@ -8,6 +8,21 @@ namespace MojoMVC.Infrastructure
 {
     public class RssClient
     {
+        public Feed GetFeedSourceFromUrl(string url = "https://feeds.megaphone.fm/FSI1483080183")
+        {
+            var reader = XmlReader.Create(url);
+            var feed = SyndicationFeed.Load(reader);
+
+            var dbFeed = new Feed
+            {
+                Title = feed.Title.Text,
+                Description = feed.Description.Text,
+                Link = url
+            };
+
+            return dbFeed;
+        }
+
         public Feed GetFeedFromUrl(string url = "https://feeds.megaphone.fm/FSI1483080183")
         {
             var reader = XmlReader.Create(url);
