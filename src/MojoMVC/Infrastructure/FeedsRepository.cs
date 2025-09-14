@@ -16,11 +16,11 @@ namespace MojoMVC.Infrastructure
                 .Include(f => f.FeedItems)
                 .ToListAsync();
         }
-        
+
         public void AddFeedSource(Feed feed)
         {
             _context.Feeds.Add(feed);
-            
+
             _context.SaveChanges();
         }
 

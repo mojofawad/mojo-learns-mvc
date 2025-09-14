@@ -5,6 +5,7 @@
     <div class="card mb-4">
         <div class="feed-header card-header">
             @feed.Title
+            Last Updated: <span class="utc-date">@feed.LastUpdated.ToString("o")</span>
         </div>
         <ul class="feed-items list-group list-group-flush">
             @foreach (var item in feed.FeedItems)

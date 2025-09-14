@@ -23,11 +23,12 @@
     </div>
     <div class="row">
         <h2>Feed Loads Below?</h2>
-        @Ajax.ActionLink("Load Feed", "GetFeedById", "Home", new { feedId = 1 }, new AjaxOptions
+        @Ajax.ActionLink("Load Feed", "GetFeedById", "Home", new { feedId = 5 }, new AjaxOptions
         {
             HttpMethod = "GET",
             UpdateTargetId = "feed-item-container",
-            InsertionMode = InsertionMode.Replace
+            InsertionMode = InsertionMode.Replace,
+            OnSuccess = "completeAjaxSuccess",
         }, new { @class = "btn btn-primary" })
         <div id="feed-item-container"></div>
     </div>

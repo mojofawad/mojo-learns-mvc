@@ -17,6 +17,9 @@ namespace MojoMVC
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/custom").Include(
+                "~/Scripts/Shared/*.js"));
 
             bundles.Add(new Bundle("~/bundles/bootstrap").Include(
                 "~/Scripts/bootstrap.js"));

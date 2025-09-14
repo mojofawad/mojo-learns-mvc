@@ -13,7 +13,7 @@ namespace MojoMVC.Infrastructure.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202509130443307_Initial"; }
+            get { return "202509140208123_Initial"; }
         }
         
         string IMigrationMetadata.Source
