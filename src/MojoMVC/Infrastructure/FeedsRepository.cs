@@ -24,11 +24,38 @@ namespace MojoMVC.Infrastructure
             _context.SaveChanges();
         }
 
-        public Feed GetFeedById(int feedId)
+        public async Task<Feed> GetFeedById(int feedId)
         {
-            return _context.Feeds
+            return await _context.Feeds
+                .Include(f => f.FeedItems)
+                .FirstOrDefaultAsync(f => f.Id == feedId);
+        }
+
+        public async Task AddLatestFeedItems(int feedId, List<FeedItem> feedItems)
+        {
+            var feed = _context.Feeds
                 .Include(f => f.FeedItems)
                 .FirstOrDefault(f => f.Id == feedId);
+
+            if (feed == null)
+            {
+                return;
+            }
+            
+            var existingItemGuids = feed.FeedItems
+                .Select(fi => fi.Guid)
+                .ToHashSet();
+            
+            var newItems = feedItems
+                .Where(fi => !existingItemGuids.Contains(fi.Guid))
+                .ToList();
+
+            if (newItems.Any())
+            {
+                feed.FeedItems.AddRange(newItems);
+                
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

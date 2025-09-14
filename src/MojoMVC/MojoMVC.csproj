@@ -135,6 +135,7 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Shared\utils.js" />
     <Content Include="Views\Home\AddFeed.cshtml" />
+    <Content Include="Views\_Partials\_FeedItems.cshtml" />
     <Content Include="Views\_Partials\_Feeds.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

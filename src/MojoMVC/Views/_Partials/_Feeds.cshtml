@@ -5,14 +5,20 @@
     <div class="card mb-4">
         <div class="feed-header card-header d-flex justify-content-between">
             <div class="align-content-start">@feed.Title</div>
-            <div class="align-content-end">Last Updated: <span class="utc-date">@feed.LastUpdated.ToString("o")</span></div>
+            <div class="align-content-end">
+                Last Updated: <span class="utc-date">@feed.LastUpdated.ToString("o")</span>
+                @Ajax.ActionLink("Update Feed", "RefreshFeedContent", "Home", new { feedId = feed.Id }, new AjaxOptions
+                {
+                    HttpMethod = "GET",
+                    UpdateTargetId = $"feed-items-{feed.Id}",
+                    InsertionMode = InsertionMode.ReplaceWith,
+                    OnSuccess = "completeAjaxSuccess",
+                }, new { @class = "btn btn-sm btn-outline-primary" })
+            </div>
+            
         </div>
-        <ul class="feed-items list-group list-group-flush">
-            @foreach (var item in feed.FeedItems)
-            {
-                <li class="list-group-item">@item.Title</li>
-                <p class="list-group-item list-group-item-info">@item.Description</p>
-            }
-        </ul>
+        <div id="feed-items-@feed.Id">
+                @Html.Partial("~/Views/_Partials/_FeedItems.cshtml", feed.FeedItems)
+        </div>
     </div>
 }

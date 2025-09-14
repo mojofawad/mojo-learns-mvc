@@ -53,12 +53,25 @@ namespace MojoMVC.Controllers
             }
         }
 
-        public ActionResult GetFeedById(int feedId)
+        public async Task<ActionResult> GetFeedById(int feedId)
         {
-            var feed = _repository.GetFeedById(feedId);
+            var feed = await _repository.GetFeedById(feedId);
             var feeds = new List<Feed>{ feed };
             
             return PartialView("~/Views/_Partials/_Feeds.cshtml", feeds);
+        }
+
+        public async Task<ActionResult> RefreshFeedContent(int feedId)
+        {
+            var feed = await _repository.GetFeedById(feedId);
+            
+            var updatedFeed = _rssClient.GetFeedFromUrl(feed.Link);
+            
+            await _repository.AddLatestFeedItems(feedId, updatedFeed.FeedItems);
+            
+            var latestFeed = await _repository.GetFeedById(feedId);
+            
+            return PartialView("~/Views/_Partials/_FeedItems.cshtml", latestFeed.FeedItems);
         }
     }
 }

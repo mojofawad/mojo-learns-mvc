@@ -21,15 +21,19 @@
             @Html.Partial("../_Partials/_Feeds", Model.DbFeeds)
         </section>
     </div>
+    <div class="row d-flex">
+        <h2 class="align-content-start">Feed Loads Below?</h2>
+        <div class="align-content-end">
+            @Ajax.ActionLink("Load Feed", "GetFeedById", "Home", new { feedId = 5 }, new AjaxOptions
+            {
+                HttpMethod = "GET",
+                UpdateTargetId = "feed-item-container",
+                InsertionMode = InsertionMode.Replace,
+                OnSuccess = "completeAjaxSuccess",
+            }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    </div>
     <div class="row">
-        <h2>Feed Loads Below?</h2>
-        @Ajax.ActionLink("Load Feed", "GetFeedById", "Home", new { feedId = 5 }, new AjaxOptions
-        {
-            HttpMethod = "GET",
-            UpdateTargetId = "feed-item-container",
-            InsertionMode = InsertionMode.Replace,
-            OnSuccess = "completeAjaxSuccess",
-        }, new { @class = "btn btn-primary" })
         <div id="feed-item-container"></div>
     </div>
 </main>
