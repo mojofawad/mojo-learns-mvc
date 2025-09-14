@@ -26,7 +26,7 @@
                             {
                                 HttpMethod = "POST",
                                 UpdateTargetId = "previewResults",
-                                OnSuccess = "initializeAddButton()",
+                                OnSuccess = "initializeAddButton(), completeAjaxSuccess()",
                                 InsertionMode = InsertionMode.Replace
                             }))
                 {

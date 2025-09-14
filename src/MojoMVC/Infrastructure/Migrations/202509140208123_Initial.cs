@@ -31,6 +31,7 @@
                         Title = c.String(),
                         Description = c.String(),
                         Link = c.String(maxLength: 450),
+                        LastUpdated = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Link, unique: true);

@@ -27,7 +27,7 @@ namespace MojoMVC.Infrastructure.Migrations
                 Description = "This is Microsoft",
                 Link = "https://microsoft.com"
             };
-            
+
             var kellabyteFeed = new Feed()
             {
                 Id = 3,

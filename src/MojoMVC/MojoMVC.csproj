@@ -80,9 +80,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\FeedsRepository.cs" />
-    <Compile Include="Infrastructure\Migrations\202509130443307_Initial.cs" />
-    <Compile Include="Infrastructure\Migrations\202509130443307_Initial.Designer.cs">
-      <DependentUpon>202509130443307_Initial.cs</DependentUpon>
+    <Compile Include="Infrastructure\Migrations\202509140208123_Initial.cs" />
+    <Compile Include="Infrastructure\Migrations\202509140208123_Initial.Designer.cs">
+      <DependentUpon>202509140208123_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Migrations\Configuration.cs" />
     <Compile Include="Infrastructure\MojoDbContext.cs" />
@@ -133,7 +133,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Shared\utils.js" />
     <Content Include="Views\Home\AddFeed.cshtml" />
+    <Content Include="Views\_Partials\_FeedItems.cshtml" />
     <Content Include="Views\_Partials\_Feeds.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -194,8 +196,8 @@
     <PackageReference Include="WebGrease" Version="1.6.0" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Infrastructure\Migrations\202509130443307_Initial.resx">
-      <DependentUpon>202509130443307_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Infrastructure\Migrations\202509140208123_Initial.resx">
+      <DependentUpon>202509140208123_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

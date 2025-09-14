@@ -14,9 +14,9 @@ namespace MojoMVC.ApiControllers
             var feed = rssClient.GetFeedSourceFromUrl(input.FeedUrl);
 
             var repository = new FeedsRepository();
-            
+
             repository.AddFeedSource(feed);
-            
+
             return Ok();
         }
     }
