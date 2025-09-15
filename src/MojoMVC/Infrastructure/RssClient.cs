@@ -38,6 +38,20 @@ namespace MojoMVC.Infrastructure
 
             foreach (var item in feed.Items)
             {
+                var extensions = item.ElementExtensions.ToList();
+
+                foreach (var extension in extensions)
+                {
+                    var extensionReader = extension.GetReader();
+                    while (extensionReader.Read())
+                    {
+                        if (extensionReader.IsStartElement("content:encoded"))
+                        {
+                            var contentString = extensionReader.ReadElementContentAsString();
+                            item.Content = SyndicationContent.CreateHtmlContent(contentString);
+                        }
+                    }
+                }
                 dbFeed.FeedItems.Add(new FeedItem
                 {
                     Title = item.Title.Text,
@@ -45,11 +59,9 @@ namespace MojoMVC.Infrastructure
                     Link = item.Links.FirstOrDefault()?.Uri.ToString() ?? string.Empty,
                     Guid = item.Id,
                     PublishedDate = item.PublishDate.UtcDateTime.ToString("u"),
-                    Content =
-                        item.Content is TextSyndicationContent textContent ? textContent.Text :
-                        item.Content is XmlSyndicationContent xmlContent ? xmlContent.ToString() :
-                        item.Content is UrlSyndicationContent urlContent ? urlContent.ToString() : string.Empty
+                    Content = item.Content != null ? (item.Content as TextSyndicationContent)?.Text : string.Empty
                 });
+                
             }
 
             return dbFeed;
