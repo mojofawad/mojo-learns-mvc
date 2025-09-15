@@ -8,6 +8,7 @@
         public string Link { get; set; }
         public string Guid { get; set; }
         public string PublishedDate { get; set; }
+        public string Content { get; set; }
 
         public int FeedId { get; set; }
         public virtual Feed Feed { get; set; }

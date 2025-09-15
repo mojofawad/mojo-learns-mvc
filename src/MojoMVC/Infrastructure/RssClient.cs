@@ -27,7 +27,7 @@ namespace MojoMVC.Infrastructure
         {
             var reader = XmlReader.Create(url);
             var feed = SyndicationFeed.Load(reader);
-
+            
             var dbFeed = new Feed
             {
                 Title = feed.Title.Text,
@@ -44,7 +44,11 @@ namespace MojoMVC.Infrastructure
                     Description = item.Summary?.Text ?? string.Empty,
                     Link = item.Links.FirstOrDefault()?.Uri.ToString() ?? string.Empty,
                     Guid = item.Id,
-                    PublishedDate = item.PublishDate.UtcDateTime.ToString("u")
+                    PublishedDate = item.PublishDate.UtcDateTime.ToString("u"),
+                    Content =
+                        item.Content is TextSyndicationContent textContent ? textContent.Text :
+                        item.Content is XmlSyndicationContent xmlContent ? xmlContent.ToString() :
+                        item.Content is UrlSyndicationContent urlContent ? urlContent.ToString() : string.Empty
                 });
             }
 

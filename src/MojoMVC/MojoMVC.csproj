@@ -84,6 +84,10 @@
     <Compile Include="Infrastructure\Migrations\202509140208123_Initial.Designer.cs">
       <DependentUpon>202509140208123_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Migrations\202509141950243_AddFeedItemContent.cs" />
+    <Compile Include="Infrastructure\Migrations\202509141950243_AddFeedItemContent.Designer.cs">
+      <DependentUpon>202509141950243_AddFeedItemContent.cs</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\Migrations\Configuration.cs" />
     <Compile Include="Infrastructure\MojoDbContext.cs" />
     <Compile Include="Infrastructure\RssClient.cs" />
@@ -198,6 +202,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Infrastructure\Migrations\202509140208123_Initial.resx">
       <DependentUpon>202509140208123_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infrastructure\Migrations\202509141950243_AddFeedItemContent.resx">
+      <DependentUpon>202509141950243_AddFeedItemContent.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

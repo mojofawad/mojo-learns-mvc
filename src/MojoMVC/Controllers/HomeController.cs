@@ -15,12 +15,9 @@ namespace MojoMVC.Controllers
         
         public async Task<ActionResult> Index()
         {
-            var feedFromWeb = _rssClient.GetFeedFromUrl();
-            var feedsFromDb = await _repository.GetFeeds();
-            
-            var model = new HomeIndexViewModel(feedFromWeb, feedsFromDb);
+            var feeds = await _repository.GetFeeds(10);
 
-            return View(model);
+            return View(feeds);
         }
 
         [HttpGet]

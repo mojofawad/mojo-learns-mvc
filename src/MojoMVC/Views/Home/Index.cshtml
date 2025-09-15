@@ -1,4 +1,4 @@
-﻿@model MojoMVC.ViewModels.HomeIndexViewModel
+﻿@model List<MojoMVC.Models.Entities.Feed>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -12,26 +12,10 @@
 
 <main>
     <div class="row">
-        <section class="col-md-6">
-            <h2>Feed from Url</h2>
-            @Html.Partial("../_Partials/_Feeds", Model.WebFeeds)
+        <section class="col-md-6 col-lg-12">
+            <h2>Latest</h2>
+            @Html.Partial("../_Partials/_Feeds", Model)
         </section>
-        <section class="col-md-6">
-            <h2>Feed from Db</h2>
-            @Html.Partial("../_Partials/_Feeds", Model.DbFeeds)
-        </section>
-    </div>
-    <div class="row d-flex">
-        <h2 class="align-content-start">Feed Loads Below?</h2>
-        <div class="align-content-end">
-            @Ajax.ActionLink("Load Feed", "GetFeedById", "Home", new { feedId = 5 }, new AjaxOptions
-            {
-                HttpMethod = "GET",
-                UpdateTargetId = "feed-item-container",
-                InsertionMode = InsertionMode.Replace,
-                OnSuccess = "completeAjaxSuccess",
-            }, new { @class = "btn btn-primary btn-sm" })
-        </div>
     </div>
     <div class="row">
         <div id="feed-item-container"></div>

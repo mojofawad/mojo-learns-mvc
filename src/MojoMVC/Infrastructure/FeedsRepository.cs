@@ -16,6 +16,23 @@ namespace MojoMVC.Infrastructure
                 .Include(f => f.FeedItems)
                 .ToListAsync();
         }
+        
+        public async Task<List<Feed>> GetFeeds(int maxItemsPerFeed)
+        {
+            var feeds = await _context.Feeds
+                .Include(f => f.FeedItems)
+                .ToListAsync();
+            
+            foreach (var feed in feeds)
+            {
+                feed.FeedItems = feed.FeedItems
+                    .OrderByDescending(fi => fi.PublishedDate)
+                    .Take(maxItemsPerFeed)
+                    .ToList();
+            }
+
+            return feeds;
+        }
 
         public void AddFeedSource(Feed feed)
         {
@@ -41,11 +58,11 @@ namespace MojoMVC.Infrastructure
             {
                 return;
             }
-            
+
             var existingItemGuids = feed.FeedItems
                 .Select(fi => fi.Guid)
                 .ToHashSet();
-            
+
             var newItems = feedItems
                 .Where(fi => !existingItemGuids.Contains(fi.Guid))
                 .ToList();
@@ -53,7 +70,7 @@ namespace MojoMVC.Infrastructure
             if (newItems.Any())
             {
                 feed.FeedItems.AddRange(newItems);
-                
+
                 await _context.SaveChangesAsync();
             }
         }
